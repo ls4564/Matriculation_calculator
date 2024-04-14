@@ -2,6 +2,7 @@ package com.example.matriculation_calculator;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,17 +11,18 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-
+    EditText user_eD,eD1,eD2,eD3,eD4,eD5;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        user_eD = findViewById(R.id.user_eD);
+        eD1 = findViewById(R.id.eD1);
+        eD2 = findViewById(R.id.eD2);
+        eD3 = findViewById(R.id.eD3);
+        eD4 = findViewById(R.id.eD4);
+        eD5 = findViewById(R.id.eD5);
+
     }
 
     public void Next_page(View view) {
