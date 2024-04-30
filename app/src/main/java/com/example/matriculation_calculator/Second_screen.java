@@ -102,18 +102,18 @@ public class Second_screen extends AppCompatActivity {
 
     public void Next_page_3(View view) {
         canSkip = false;
-
+        String str_1_2,str_1_3,str_2_2,str_2_3,str_3_1,str_3_2,str_3_3,str_4_1,str_4_2,str_4_3,str_5_1,str_5_2,str_5_3;
         //Math
-        String str_1_2 = eD_1_2_pg2.getText().toString();
-        String str_1_3 = eD_1_3_pg2.getText().toString();
+        str_1_2 = eD_1_2_pg2.getText().toString();
+        str_1_3 = eD_1_3_pg2.getText().toString();
         if (!str_1_2.isEmpty() && !str_1_3.isEmpty()) {
             int num_1_2 = Integer.parseInt(str_1_2);
             int num_1_3 = Integer.parseInt(str_1_2);
 
             if (check_units_legal(num_1_2) && check_grade_legal(num_1_3)) {
                 //English
-                String str_2_2 = eD_1_2_pg2.getText().toString();
-                String str_2_3 = eD_1_3_pg2.getText().toString();
+                str_2_2 = eD_1_2_pg2.getText().toString();
+                str_2_3 = eD_1_3_pg2.getText().toString();
                 if (!str_2_2.isEmpty() && !str_2_3.isEmpty()) {
                     int num_2_2 = Integer.parseInt(str_1_2);
                     int num_2_3 = Integer.parseInt(str_1_2);
@@ -121,10 +121,10 @@ public class Second_screen extends AppCompatActivity {
                     if (check_units_legal(num_2_2) && check_grade_legal(num_2_3)) {
                         switch (btnClick) {
                             case 1:
-                                String str_3_1 = eD_3_1_pg2.getText().toString();
+                                str_3_1 = eD_3_1_pg2.getText().toString();
                                 if (!str_3_1.isEmpty()) {
-                                    String str_3_2 = eD_3_2_pg2.getText().toString();
-                                    String str_3_3 = eD_3_3_pg2.getText().toString();
+                                    str_3_2 = eD_3_2_pg2.getText().toString();
+                                    str_3_3 = eD_3_3_pg2.getText().toString();
                                     if (!str_3_2.isEmpty() && !str_3_3.isEmpty()) {
                                         int num_3_2 = Integer.parseInt(str_3_2);
                                         int num_3_3 = Integer.parseInt(str_3_3);
@@ -135,18 +135,18 @@ public class Second_screen extends AppCompatActivity {
                                 }
                                 break;
                             case 2:
-                                String str_3_1 = eD_3_1_pg2.getText().toString();
+                                str_3_1 = eD_3_1_pg2.getText().toString();
                                 if (!str_3_1.isEmpty()) {
-                                    String str_3_2 = eD_3_2_pg2.getText().toString();
-                                    String str_3_3 = eD_3_3_pg2.getText().toString();
+                                    str_3_2 = eD_3_2_pg2.getText().toString();
+                                    str_3_3 = eD_3_3_pg2.getText().toString();
                                     if (!str_3_2.isEmpty() && !str_3_3.isEmpty()) {
                                         int num_3_2 = Integer.parseInt(str_3_2);
                                         int num_3_3 = Integer.parseInt(str_3_3);
                                         if (check_units_legal(num_3_2) && check_grade_legal(num_3_3)) {
-                                            String str_4_1 = eD_4_1_pg2.getText().toString();
+                                            str_4_1 = eD_4_1_pg2.getText().toString();
                                             if (!str_4_1.isEmpty()) {
-                                                String str_4_2 = eD_4_2_pg2.getText().toString();
-                                                String str_4_3 = eD_4_3_pg2.getText().toString();
+                                                str_4_2 = eD_4_2_pg2.getText().toString();
+                                                str_4_3 = eD_4_3_pg2.getText().toString();
                                                 if (!str_4_2.isEmpty() && !str_4_3.isEmpty()) {
                                                     int num_4_2 = Integer.parseInt(str_4_2);
                                                     int num_4_3 = Integer.parseInt(str_4_3);
@@ -159,18 +159,16 @@ public class Second_screen extends AppCompatActivity {
                                     }
                                     break;
                                     case 3:
-                                        String str_5_1 = eD_5_1_pg2.getText().toString();
-                                        if (!str_5_1.isEmpty()) {
 
-                                        }
                                         break;
                                 }
                         }
-                    else
+                        else
                         {
                             Toast.makeText(this, "English input illegal!", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
+                    }
+                    else {
                         Toast.makeText(this, "The field of English Empty", Toast.LENGTH_SHORT).show();
                     }
                 } else {
