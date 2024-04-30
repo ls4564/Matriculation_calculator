@@ -14,9 +14,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class Second_screen extends AppCompatActivity {
-    EditText eD_1_2_pg2,eD_1_3_pg2,eD_2_2_pg2,eD_2_3_pg2,eD_3_1_pg2,eD_3_2_pg2,eD_3_3_pg2,eD_4_1_pg2,eD_4_2_pg2,eD_4_3_pg2,eD_5_1_pg2,eD_5_2_pg2,eD_5_3_pg2;
-    Button btn_op1,btn_op2,btn_op3,btn_for_pg2_to_pg3;
+    EditText eD_1_2_pg2, eD_1_3_pg2, eD_2_2_pg2, eD_2_3_pg2, eD_3_1_pg2, eD_3_2_pg2, eD_3_3_pg2, eD_4_1_pg2, eD_4_2_pg2, eD_4_3_pg2, eD_5_1_pg2, eD_5_2_pg2, eD_5_3_pg2;
+    Button btn_op1, btn_op2, btn_op3, btn_for_pg2_to_pg3;
+    boolean canSkip = false;
     int btnClick = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +44,7 @@ public class Second_screen extends AppCompatActivity {
 
 
         Intent gi = getIntent();
-        double sum = gi.getDoubleExtra("sum",-1);
+        double sum = gi.getDoubleExtra("sum", -1);
         String user_name = gi.getStringExtra("user_name");
     }
 
@@ -63,9 +65,9 @@ public class Second_screen extends AppCompatActivity {
     }
 
     public void second_op(View view) {
-        eD_3_1_pg2.setVisibility(View.INVISIBLE);
-        eD_3_2_pg2.setVisibility(View.INVISIBLE);
-        eD_3_3_pg2.setVisibility(View.INVISIBLE);
+        eD_3_1_pg2.setVisibility(View.VISIBLE);
+        eD_3_2_pg2.setVisibility(View.VISIBLE);
+        eD_3_3_pg2.setVisibility(View.VISIBLE);
         eD_4_1_pg2.setVisibility(View.VISIBLE);
         eD_4_2_pg2.setVisibility(View.VISIBLE);
         eD_4_3_pg2.setVisibility(View.VISIBLE);
@@ -79,12 +81,12 @@ public class Second_screen extends AppCompatActivity {
     }
 
     public void third_op(View view) {
-        eD_3_1_pg2.setVisibility(View.INVISIBLE);
-        eD_3_2_pg2.setVisibility(View.INVISIBLE);
-        eD_3_3_pg2.setVisibility(View.INVISIBLE);
-        eD_4_1_pg2.setVisibility(View.INVISIBLE);
-        eD_4_2_pg2.setVisibility(View.INVISIBLE);
-        eD_4_3_pg2.setVisibility(View.INVISIBLE);
+        eD_3_1_pg2.setVisibility(View.VISIBLE);
+        eD_3_2_pg2.setVisibility(View.VISIBLE);
+        eD_3_3_pg2.setVisibility(View.VISIBLE);
+        eD_4_1_pg2.setVisibility(View.VISIBLE);
+        eD_4_2_pg2.setVisibility(View.VISIBLE);
+        eD_4_3_pg2.setVisibility(View.VISIBLE);
         eD_5_1_pg2.setVisibility(View.VISIBLE);
         eD_5_2_pg2.setVisibility(View.VISIBLE);
         eD_5_3_pg2.setVisibility(View.VISIBLE);
@@ -99,27 +101,100 @@ public class Second_screen extends AppCompatActivity {
     }
 
     public void Next_page_3(View view) {
+        canSkip = false;
+
+        //Math
         String str_1_2 = eD_1_2_pg2.getText().toString();
         String str_1_3 = eD_1_3_pg2.getText().toString();
-        if(!str_1_2.isEmpty() && !str_1_3.isEmpty())
-        {
+        if (!str_1_2.isEmpty() && !str_1_3.isEmpty()) {
+            int num_1_2 = Integer.parseInt(str_1_2);
+            int num_1_3 = Integer.parseInt(str_1_2);
 
-        }
-        else
-        {
-            Toast.makeText(this, "The input is illegal!", Toast.LENGTH_SHORT).show();
+            if (check_units_legal(num_1_2) && check_grade_legal(num_1_3)) {
+                //English
+                String str_2_2 = eD_1_2_pg2.getText().toString();
+                String str_2_3 = eD_1_3_pg2.getText().toString();
+                if (!str_2_2.isEmpty() && !str_2_3.isEmpty()) {
+                    int num_2_2 = Integer.parseInt(str_1_2);
+                    int num_2_3 = Integer.parseInt(str_1_2);
 
+                    if (check_units_legal(num_2_2) && check_grade_legal(num_2_3)) {
+                        switch (btnClick) {
+                            case 1:
+                                String str_3_1 = eD_3_1_pg2.getText().toString();
+                                if (!str_3_1.isEmpty()) {
+                                    String str_3_2 = eD_3_2_pg2.getText().toString();
+                                    String str_3_3 = eD_3_3_pg2.getText().toString();
+                                    if (!str_3_2.isEmpty() && !str_3_3.isEmpty()) {
+                                        int num_3_2 = Integer.parseInt(str_3_2);
+                                        int num_3_3 = Integer.parseInt(str_3_3);
+                                        if (check_units_legal(num_3_2) && check_grade_legal(num_3_3)) {
+                                            canSkip = true;
+                                        }
+                                    }
+                                }
+                                break;
+                            case 2:
+                                String str_3_1 = eD_3_1_pg2.getText().toString();
+                                if (!str_3_1.isEmpty()) {
+                                    String str_3_2 = eD_3_2_pg2.getText().toString();
+                                    String str_3_3 = eD_3_3_pg2.getText().toString();
+                                    if (!str_3_2.isEmpty() && !str_3_3.isEmpty()) {
+                                        int num_3_2 = Integer.parseInt(str_3_2);
+                                        int num_3_3 = Integer.parseInt(str_3_3);
+                                        if (check_units_legal(num_3_2) && check_grade_legal(num_3_3)) {
+                                            String str_4_1 = eD_4_1_pg2.getText().toString();
+                                            if (!str_4_1.isEmpty()) {
+                                                String str_4_2 = eD_4_2_pg2.getText().toString();
+                                                String str_4_3 = eD_4_3_pg2.getText().toString();
+                                                if (!str_4_2.isEmpty() && !str_4_3.isEmpty()) {
+                                                    int num_4_2 = Integer.parseInt(str_4_2);
+                                                    int num_4_3 = Integer.parseInt(str_4_3);
+                                                    if (check_units_legal(num_4_2) && check_grade_legal(num_4_3)) {
+                                                        canSkip = true;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    break;
+                                    case 3:
+                                        String str_5_1 = eD_5_1_pg2.getText().toString();
+                                        if (!str_5_1.isEmpty()) {
+
+                                        }
+                                        break;
+                                }
+                        }
+                    else
+                        {
+                            Toast.makeText(this, "English input illegal!", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(this, "The field of English Empty", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Math input illegal!", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "The field of Math Empty", Toast.LENGTH_SHORT).show();
+            }
         }
     }
-
-    public boolean check_units_legal(int num)
+    public boolean check_units_legal( int num)
     {
-        if(num >= 3)
-        {
-            if(num <= 5)
-            {
+        if (num >= 3) {
+            if (num <= 5) {
                 return true;
             }
+        }
+        return false;
+    }
+    public boolean check_grade_legal ( int num)
+    {
+
+        if (num <= 100) {
+            return true;
         }
         return false;
     }
