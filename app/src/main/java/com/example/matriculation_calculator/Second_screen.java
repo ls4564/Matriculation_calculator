@@ -18,6 +18,7 @@ public class Second_screen extends AppCompatActivity {
     Button btn_op1, btn_op2, btn_op3, btn_for_pg2_to_pg3;
     boolean canSkip = false;
     int btnClick = 0;
+    private String str_1_2,str_1_3,str_2_2,str_2_3,str_3_1,str_3_2,str_3_3,str_4_1,str_4_2,str_4_3,str_5_1,str_5_2,str_5_3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class Second_screen extends AppCompatActivity {
 
         Intent gi = getIntent();
         double sum = gi.getDoubleExtra("sum", -1);
+        int units = gi.getIntExtra("units", -1);
         String user_name = gi.getStringExtra("user_name");
     }
 
@@ -102,81 +104,59 @@ public class Second_screen extends AppCompatActivity {
 
     public void Next_page_3(View view) {
         canSkip = false;
-        String str_1_2,str_1_3,str_2_2,str_2_3,str_3_1,str_3_2,str_3_3,str_4_1,str_4_2,str_4_3,str_5_1,str_5_2,str_5_3;
+
         //Math
         str_1_2 = eD_1_2_pg2.getText().toString();
         str_1_3 = eD_1_3_pg2.getText().toString();
         if (!str_1_2.isEmpty() && !str_1_3.isEmpty()) {
             int num_1_2 = Integer.parseInt(str_1_2);
-            int num_1_3 = Integer.parseInt(str_1_2);
+            int num_1_3 = Integer.parseInt(str_1_3);
 
             if (check_units_legal(num_1_2) && check_grade_legal(num_1_3)) {
                 //English
-                str_2_2 = eD_1_2_pg2.getText().toString();
-                str_2_3 = eD_1_3_pg2.getText().toString();
+                str_2_2 = eD_2_2_pg2.getText().toString();
+                str_2_3 = eD_2_3_pg2.getText().toString();
                 if (!str_2_2.isEmpty() && !str_2_3.isEmpty()) {
-                    int num_2_2 = Integer.parseInt(str_1_2);
-                    int num_2_3 = Integer.parseInt(str_1_2);
+                    int num_2_2 = Integer.parseInt(str_2_2);
+                    int num_2_3 = Integer.parseInt(str_2_3);
 
                     if (check_units_legal(num_2_2) && check_grade_legal(num_2_3)) {
                         switch (btnClick) {
                             case 1:
-                                str_3_1 = eD_3_1_pg2.getText().toString();
-                                if (!str_3_1.isEmpty()) {
-                                    str_3_2 = eD_3_2_pg2.getText().toString();
-                                    str_3_3 = eD_3_3_pg2.getText().toString();
-                                    if (!str_3_2.isEmpty() && !str_3_3.isEmpty()) {
-                                        int num_3_2 = Integer.parseInt(str_3_2);
-                                        int num_3_3 = Integer.parseInt(str_3_3);
-                                        if (check_units_legal(num_3_2) && check_grade_legal(num_3_3)) {
-                                            canSkip = true;
-                                        }
-                                    }
-                                }
+                                canSkip = check_one_line();
                                 break;
                             case 2:
-                                str_3_1 = eD_3_1_pg2.getText().toString();
-                                if (!str_3_1.isEmpty()) {
-                                    str_3_2 = eD_3_2_pg2.getText().toString();
-                                    str_3_3 = eD_3_3_pg2.getText().toString();
-                                    if (!str_3_2.isEmpty() && !str_3_3.isEmpty()) {
-                                        int num_3_2 = Integer.parseInt(str_3_2);
-                                        int num_3_3 = Integer.parseInt(str_3_3);
-                                        if (check_units_legal(num_3_2) && check_grade_legal(num_3_3)) {
-                                            str_4_1 = eD_4_1_pg2.getText().toString();
-                                            if (!str_4_1.isEmpty()) {
-                                                str_4_2 = eD_4_2_pg2.getText().toString();
-                                                str_4_3 = eD_4_3_pg2.getText().toString();
-                                                if (!str_4_2.isEmpty() && !str_4_3.isEmpty()) {
-                                                    int num_4_2 = Integer.parseInt(str_4_2);
-                                                    int num_4_3 = Integer.parseInt(str_4_3);
-                                                    if (check_units_legal(num_4_2) && check_grade_legal(num_4_3)) {
-                                                        canSkip = true;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                    break;
-                                    case 3:
+                                canSkip = check_two_line();
+                                break;
+                            case 3:
+                                canSkip = check_three_line();
+                                break;
+                        }
 
-                                        break;
-                                }
-                        }
-                        else
+                        if(canSkip)
                         {
-                            Toast.makeText(this, "English input illegal!", Toast.LENGTH_SHORT).show();
+
                         }
                     }
-                    else {
-                        Toast.makeText(this, "The field of English Empty", Toast.LENGTH_SHORT).show();
+                    else
+                    {
+                        Toast.makeText(this, "English input illegal!", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(this, "Math input illegal!", Toast.LENGTH_SHORT).show();
+
                 }
-            } else {
-                Toast.makeText(this, "The field of Math Empty", Toast.LENGTH_SHORT).show();
+                else
+                {
+                    Toast.makeText(this, "The field of English Empty", Toast.LENGTH_SHORT).show();
+                }
             }
+            else
+            {
+                Toast.makeText(this, "Math input illegal!", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else
+        {
+            Toast.makeText(this, "The field of Math Empty", Toast.LENGTH_SHORT).show();
         }
     }
     public boolean check_units_legal( int num)
@@ -196,4 +176,96 @@ public class Second_screen extends AppCompatActivity {
         }
         return false;
     }
+    public boolean check_one_line()
+    {
+        str_3_1 = eD_3_1_pg2.getText().toString();
+        if (!str_3_1.isEmpty()) {
+            str_3_2 = eD_3_2_pg2.getText().toString();
+            str_3_3 = eD_3_3_pg2.getText().toString();
+            if (!str_3_2.isEmpty() && !str_3_3.isEmpty()) {
+                int num_3_2 = Integer.parseInt(str_3_2);
+                int num_3_3 = Integer.parseInt(str_3_3);
+                if (check_units_legal(num_3_2) && check_grade_legal(num_3_3)) {
+                    return true;
+                }
+                else
+                {
+                    Toast.makeText(this, "unit or grade of fist line illegal !!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                Toast.makeText(this, "unit or grade of fist line Empty !!", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+        else
+        {
+            Toast.makeText(this, "name of fist line Empty", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
+    public boolean check_two_line()
+    {
+        if(check_one_line());
+        {
+            str_4_1 = eD_4_1_pg2.getText().toString();
+            if (!str_4_1.isEmpty()) {
+                str_4_2 = eD_4_2_pg2.getText().toString();
+                str_4_3 = eD_4_3_pg2.getText().toString();
+                if (!str_4_2.isEmpty() && !str_4_3.isEmpty()) {
+                    int num_4_2 = Integer.parseInt(str_4_2);
+                    int num_4_3 = Integer.parseInt(str_4_3);
+                    if (check_units_legal(num_4_2) && check_grade_legal(num_4_3)) {
+                        return true;
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "unit or grade of second line illegal !!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(this, "unit or grade of second line Empty !!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                Toast.makeText(this, "name of second line Empty", Toast.LENGTH_SHORT).show();
+            }
+        }
+        return false;
+    }
+    public boolean check_three_line()
+    {
+        if(check_two_line());
+        {
+            str_5_1 = eD_5_1_pg2.getText().toString();
+            if (!str_5_1.isEmpty()) {
+                str_5_2 = eD_5_2_pg2.getText().toString();
+                str_5_3 = eD_5_3_pg2.getText().toString();
+                if (!str_5_2.isEmpty() && !str_5_3.isEmpty()) {
+                    int num_5_2 = Integer.parseInt(str_5_2);
+                    int num_5_3 = Integer.parseInt(str_4_3);
+                    if (check_units_legal(num_5_2) && check_grade_legal(num_5_3)) {
+                        return true;
+                    }
+                    else
+                    {
+                        Toast.makeText(this, "unit or grade of third line illegal !!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(this, "unit or grade of third line Empty !!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else
+            {
+                Toast.makeText(this, "name of third line Empty", Toast.LENGTH_SHORT).show();
+            }
+        }
+        return false;
+    }
+
 }

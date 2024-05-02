@@ -41,9 +41,11 @@ public class MainActivity extends AppCompatActivity {
                 int num5 = Integer.parseInt(st5);
                 if (check_legal(num1) & check_legal(num2) & check_legal(num3) & check_legal(num4) & check_legal(num5)) {
                     Intent si = new Intent(this, Second_screen.class);
-                    double sum = ((num1 + num2 + num3 + num4 + num5)*2) / 5;
+                    double sum = ((num1 + num2 + num3 + num4 + num5)*2) ;
+                    int units = 10;
 
                     si.putExtra("sum",sum);
+                    si.putExtra("units",units);
                     si.putExtra("user_name",user_name);
                     startActivity(si);
                 } else {
