@@ -17,7 +17,8 @@ public class Second_screen extends AppCompatActivity {
     EditText eD_1_2_pg2, eD_1_3_pg2, eD_2_2_pg2, eD_2_3_pg2, eD_3_1_pg2, eD_3_2_pg2, eD_3_3_pg2, eD_4_1_pg2, eD_4_2_pg2, eD_4_3_pg2, eD_5_1_pg2, eD_5_2_pg2, eD_5_3_pg2;
     Button btn_op1, btn_op2, btn_op3, btn_for_pg2_to_pg3;
     boolean canSkip = false;
-    int btnClick = 0, units;
+    int btnClick = 0, units,ana1,ana2,ana3,ana4,ana5,ana6,ana7;
+    int[] arr = {-1,-1,-1,-1,-1,-1,-1};
     double sum_grade;
     private String str_1_2,str_1_3,str_2_2,str_2_3,str_3_1,str_3_2,str_3_3,str_4_1,str_4_2,str_4_3,str_5_1,str_5_2,str_5_3;
     private int num_1_2,num_1_3,num_2_2,num_2_3,num_3_1,num_3_2,num_3_3,num_4_1,num_4_2,num_4_3,num_5_1,num_5_2,num_5_3;
@@ -26,31 +27,14 @@ public class Second_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_screen);
-        eD_1_2_pg2 = findViewById(R.id.eD_1_2_pg2);
-        eD_1_3_pg2 = findViewById(R.id.eD_1_3_pg2);
-        eD_2_2_pg2 = findViewById(R.id.eD_2_2_pg2);
-        eD_2_3_pg2 = findViewById(R.id.eD_2_3_pg2);
-        eD_3_1_pg2 = findViewById(R.id.eD_3_1_pg2);
-        eD_3_2_pg2 = findViewById(R.id.eD_3_2_pg2);
-        eD_3_3_pg2 = findViewById(R.id.eD_3_3_pg2);
-        eD_4_1_pg2 = findViewById(R.id.eD_4_1_pg2);
-        eD_4_2_pg2 = findViewById(R.id.eD_4_2_pg2);
-        eD_4_3_pg2 = findViewById(R.id.eD_4_3_pg2);
-        eD_5_1_pg2 = findViewById(R.id.eD_5_1_pg2);
-        eD_5_2_pg2 = findViewById(R.id.eD_5_2_pg2);
-        eD_5_3_pg2 = findViewById(R.id.eD_5_3_pg2);
-
-        btn_op1 = findViewById(R.id.btn_op1);
-        btn_op2 = findViewById(R.id.btn_op2);
-        btn_op3 = findViewById(R.id.btn_op3);
-        btn_for_pg2_to_pg3 = findViewById(R.id.btn_for_pg2_to_pg3);
-
+        weddings();
 
         Intent gi = getIntent();
         sum_grade = gi.getDoubleExtra("sum", -1);
         units = gi.getIntExtra("units", -1);
-        //String user_name = gi.getStringExtra("user_name");
     }
+
+
 
     public void first_op(View view) {
         eD_3_1_pg2.setVisibility(View.VISIBLE);
@@ -68,6 +52,8 @@ public class Second_screen extends AppCompatActivity {
         btn_for_pg2_to_pg3.setVisibility(View.VISIBLE);
     }
 
+
+
     public void second_op(View view) {
         eD_3_1_pg2.setVisibility(View.VISIBLE);
         eD_3_2_pg2.setVisibility(View.VISIBLE);
@@ -83,6 +69,8 @@ public class Second_screen extends AppCompatActivity {
         btnClick = 2;
         btn_for_pg2_to_pg3.setVisibility(View.VISIBLE);
     }
+
+
 
     public void third_op(View view) {
         eD_3_1_pg2.setVisibility(View.VISIBLE);
@@ -100,9 +88,14 @@ public class Second_screen extends AppCompatActivity {
         btn_for_pg2_to_pg3.setVisibility(View.VISIBLE);
     }
 
+
+
     public void go_back_1(View view) {
         finish();
     }
+
+
+
 
     public void Next_page_3(View view) {
         canSkip = false;
@@ -137,11 +130,14 @@ public class Second_screen extends AppCompatActivity {
 
                         if(canSkip)
                         {
-                            units = units = num_1_2;
+                            units = units + num_1_2;
+                            num_1_3 = bonus(num_1_3,num_1_2,true);
                             sum_grade = sum_grade + (num_1_3 * num_1_2);
 
-                            units = units = num_2_2;
+                            units = units + num_2_2;
+                            num_2_3 = bonus(num_2_3,num_2_2,true);
                             sum_grade = sum_grade + (num_2_3 * num_2_2);
+
                             switch (btnClick)
                             {
                                 case 1:
@@ -155,7 +151,7 @@ public class Second_screen extends AppCompatActivity {
                                     break;
                             }
                             Intent nl = new Intent(this, Third_screen.class);
-
+                            nl.putExtra("arr",arr);
                             nl.putExtra("sum_grade",sum_grade);
                             nl.putExtra("units",units);
                             startActivity(nl);
@@ -183,6 +179,31 @@ public class Second_screen extends AppCompatActivity {
         }
     }
 
+
+    public void weddings()
+    {
+        eD_1_2_pg2 = findViewById(R.id.eD_1_2_pg2);
+        eD_1_3_pg2 = findViewById(R.id.eD_1_3_pg2);
+        eD_2_2_pg2 = findViewById(R.id.eD_2_2_pg2);
+        eD_2_3_pg2 = findViewById(R.id.eD_2_3_pg2);
+        eD_3_1_pg2 = findViewById(R.id.eD_3_1_pg2);
+        eD_3_2_pg2 = findViewById(R.id.eD_3_2_pg2);
+        eD_3_3_pg2 = findViewById(R.id.eD_3_3_pg2);
+        eD_4_1_pg2 = findViewById(R.id.eD_4_1_pg2);
+        eD_4_2_pg2 = findViewById(R.id.eD_4_2_pg2);
+        eD_4_3_pg2 = findViewById(R.id.eD_4_3_pg2);
+        eD_5_1_pg2 = findViewById(R.id.eD_5_1_pg2);
+        eD_5_2_pg2 = findViewById(R.id.eD_5_2_pg2);
+        eD_5_3_pg2 = findViewById(R.id.eD_5_3_pg2);
+
+        btn_op1 = findViewById(R.id.btn_op1);
+        btn_op2 = findViewById(R.id.btn_op2);
+        btn_op3 = findViewById(R.id.btn_op3);
+        btn_for_pg2_to_pg3 = findViewById(R.id.btn_for_pg2_to_pg3);
+    }
+
+
+
     public boolean check_units_legal( int num)
     {
         if (num >= 3) {
@@ -193,6 +214,8 @@ public class Second_screen extends AppCompatActivity {
         return false;
     }
 
+
+
     public boolean check_grade_legal ( int num)
     {
 
@@ -201,6 +224,41 @@ public class Second_screen extends AppCompatActivity {
         }
         return false;
     }
+
+
+
+    public int bonus(int grade,int unit,boolean op)
+            //op true - English, math. 4 = 15, 5 = 30
+            //op false - all the others. 4 = 10, 5 = 20
+    {
+        if(op)
+        {
+            switch (unit)
+            {
+                case 4:
+                    grade = grade + 15;
+                    break;
+                case 5:
+                    grade = grade + 30;
+                    break;
+            }
+        }
+        else
+        {
+            switch (unit)
+            {
+                case 4:
+                    grade = grade + 10;
+                    break;
+                case 5:
+                    grade = grade + 20;
+                    break;
+            }
+        }
+        return grade;
+    }
+
+
 
     public boolean check_one_line()
     {
@@ -231,6 +289,9 @@ public class Second_screen extends AppCompatActivity {
         }
         return false;
     }
+
+
+
     public boolean check_two_line()
     {
         if(check_one_line());
@@ -262,6 +323,9 @@ public class Second_screen extends AppCompatActivity {
         }
         return false;
     }
+
+
+
     public boolean check_three_line()
     {
         if(check_two_line());

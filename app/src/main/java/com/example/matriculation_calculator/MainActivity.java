@@ -15,14 +15,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        user_eD = findViewById(R.id.user_eD);
-        eD1 = findViewById(R.id.eD1);
-        eD2 = findViewById(R.id.eD2);
-        eD3 = findViewById(R.id.eD3);
-        eD4 = findViewById(R.id.eD4);
-        eD5 = findViewById(R.id.eD5);
-
+        weddings();
     }
+
+
 
     public void Next_page_2(View view) {
         String st1 = eD1.getText().toString();
@@ -60,6 +56,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    public void weddings()
+    {
+        user_eD = findViewById(R.id.user_eD);
+        eD1 = findViewById(R.id.eD1);
+        eD2 = findViewById(R.id.eD2);
+        eD3 = findViewById(R.id.eD3);
+        eD4 = findViewById(R.id.eD4);
+        eD5 = findViewById(R.id.eD5);
+    }
+
+
+
     public boolean check_legal(int num)
     {
 
@@ -71,76 +80,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
-
-/*
- @Override
-    protected void onActivityResult(int source, int result, @Nullable Intent data_back){
-        super.onActivityResult(source, result, data_back);
-        if (source == REQUEST_CODE) {
-            if (result == Activity.RESULT_OK) {
-                if (data_back != null) {
-                    b3 = data_back.getBooleanExtra("b1",false);
-                    b4 = data_back.getBooleanExtra("b2",false);
-                    tv1.setText("");
-                    tv4.setText("");
-
-                    if(b4)
-                    {
-                        ans2 = data_back.getDoubleExtra("X2", -1);
-                        tv4.setText(String.format("X: %.1f",ans2));
-                    }
-
-
-                    if(b3)
-                    {
-                        ans1 = data_back.getDoubleExtra("X1", -1);
-                        tv1.setText(String.format("X: %.1f",ans1));
-                    }
-                    if(b4 || b3)
-                    {
-                        iV.setVisibility(View.VISIBLE);
-                        if(a > 0)//+a  u
-                        {
-                            if (check_variation(a,b,c) > 0)
-                            {
-                                iV.setImageResource(R.drawable.abc_a_minus_b);
-                            }
-                            else if (check_variation(a,b,c) == 0)
-                            {
-                                iV.setImageResource(R.drawable.abc_a);
-                            }
-                            else
-                            {
-                                iV.setImageResource(R.drawable.abc_nox_a);
-                            }
-                        }
-                        else if (a < 0)//-a h
-                        {
-                            if (check_variation(a,b,c) > 0)
-                            {
-                                iV.setImageResource(R.drawable.abc_ninus_a_b);
-                            }
-                            else if (check_variation(a,b,c) == 0)
-                            {
-                                iV.setImageResource(R.drawable.abc_minus_a);
-                            }
-                            else
-                            {
-                                iV.setImageResource(R.drawable.abc_nox_minus_a);
-                            }
-                        }
-                        else //-----
-                        {
-                            iV.setImageResource(R.drawable.abc);
-                        }
-                    }
-                    else
-                    {
-                        iV.setVisibility(View.INVISIBLE);
-                    }
-                }
-            }
-        }
-    }
- */
