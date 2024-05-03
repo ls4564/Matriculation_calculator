@@ -17,8 +17,10 @@ public class Second_screen extends AppCompatActivity {
     EditText eD_1_2_pg2, eD_1_3_pg2, eD_2_2_pg2, eD_2_3_pg2, eD_3_1_pg2, eD_3_2_pg2, eD_3_3_pg2, eD_4_1_pg2, eD_4_2_pg2, eD_4_3_pg2, eD_5_1_pg2, eD_5_2_pg2, eD_5_3_pg2;
     Button btn_op1, btn_op2, btn_op3, btn_for_pg2_to_pg3;
     boolean canSkip = false;
-    int btnClick = 0;
+    int btnClick = 0, units;
+    double sum_grade;
     private String str_1_2,str_1_3,str_2_2,str_2_3,str_3_1,str_3_2,str_3_3,str_4_1,str_4_2,str_4_3,str_5_1,str_5_2,str_5_3;
+    private int num_1_2,num_1_3,num_2_2,num_2_3,num_3_1,num_3_2,num_3_3,num_4_1,num_4_2,num_4_3,num_5_1,num_5_2,num_5_3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +47,9 @@ public class Second_screen extends AppCompatActivity {
 
 
         Intent gi = getIntent();
-        double sum = gi.getDoubleExtra("sum", -1);
-        int units = gi.getIntExtra("units", -1);
-        String user_name = gi.getStringExtra("user_name");
+        sum_grade = gi.getDoubleExtra("sum", -1);
+        units = gi.getIntExtra("units", -1);
+        //String user_name = gi.getStringExtra("user_name");
     }
 
     public void first_op(View view) {
@@ -109,16 +111,16 @@ public class Second_screen extends AppCompatActivity {
         str_1_2 = eD_1_2_pg2.getText().toString();
         str_1_3 = eD_1_3_pg2.getText().toString();
         if (!str_1_2.isEmpty() && !str_1_3.isEmpty()) {
-            int num_1_2 = Integer.parseInt(str_1_2);
-            int num_1_3 = Integer.parseInt(str_1_3);
+            num_1_2 = Integer.parseInt(str_1_2);
+            num_1_3 = Integer.parseInt(str_1_3);
 
             if (check_units_legal(num_1_2) && check_grade_legal(num_1_3)) {
                 //English
                 str_2_2 = eD_2_2_pg2.getText().toString();
                 str_2_3 = eD_2_3_pg2.getText().toString();
                 if (!str_2_2.isEmpty() && !str_2_3.isEmpty()) {
-                    int num_2_2 = Integer.parseInt(str_2_2);
-                    int num_2_3 = Integer.parseInt(str_2_3);
+                    num_2_2 = Integer.parseInt(str_2_2);
+                    num_2_3 = Integer.parseInt(str_2_3);
 
                     if (check_units_legal(num_2_2) && check_grade_legal(num_2_3)) {
                         switch (btnClick) {
@@ -135,7 +137,28 @@ public class Second_screen extends AppCompatActivity {
 
                         if(canSkip)
                         {
+                            units = units = num_1_2;
+                            sum_grade = sum_grade + (num_1_3 * num_1_2);
 
+                            units = units = num_2_2;
+                            sum_grade = sum_grade + (num_2_3 * num_2_2);
+                            switch (btnClick)
+                            {
+                                case 1:
+                                    canSkip = check_one_line();
+                                    break;
+                                case 2:
+                                    canSkip = check_two_line();
+                                    break;
+                                case 3:
+                                    canSkip = check_three_line();
+                                    break;
+                            }
+                            Intent nl = new Intent(this, Third_screen.class);
+
+                            nl.putExtra("sum_grade",sum_grade);
+                            nl.putExtra("units",units);
+                            startActivity(nl);
                         }
                     }
                     else
@@ -159,6 +182,7 @@ public class Second_screen extends AppCompatActivity {
             Toast.makeText(this, "The field of Math Empty", Toast.LENGTH_SHORT).show();
         }
     }
+
     public boolean check_units_legal( int num)
     {
         if (num >= 3) {
@@ -168,6 +192,7 @@ public class Second_screen extends AppCompatActivity {
         }
         return false;
     }
+
     public boolean check_grade_legal ( int num)
     {
 
@@ -176,6 +201,7 @@ public class Second_screen extends AppCompatActivity {
         }
         return false;
     }
+
     public boolean check_one_line()
     {
         str_3_1 = eD_3_1_pg2.getText().toString();
@@ -183,8 +209,8 @@ public class Second_screen extends AppCompatActivity {
             str_3_2 = eD_3_2_pg2.getText().toString();
             str_3_3 = eD_3_3_pg2.getText().toString();
             if (!str_3_2.isEmpty() && !str_3_3.isEmpty()) {
-                int num_3_2 = Integer.parseInt(str_3_2);
-                int num_3_3 = Integer.parseInt(str_3_3);
+                num_3_2 = Integer.parseInt(str_3_2);
+                num_3_3 = Integer.parseInt(str_3_3);
                 if (check_units_legal(num_3_2) && check_grade_legal(num_3_3)) {
                     return true;
                 }
@@ -214,8 +240,8 @@ public class Second_screen extends AppCompatActivity {
                 str_4_2 = eD_4_2_pg2.getText().toString();
                 str_4_3 = eD_4_3_pg2.getText().toString();
                 if (!str_4_2.isEmpty() && !str_4_3.isEmpty()) {
-                    int num_4_2 = Integer.parseInt(str_4_2);
-                    int num_4_3 = Integer.parseInt(str_4_3);
+                    num_4_2 = Integer.parseInt(str_4_2);
+                    num_4_3 = Integer.parseInt(str_4_3);
                     if (check_units_legal(num_4_2) && check_grade_legal(num_4_3)) {
                         return true;
                     }
@@ -245,8 +271,8 @@ public class Second_screen extends AppCompatActivity {
                 str_5_2 = eD_5_2_pg2.getText().toString();
                 str_5_3 = eD_5_3_pg2.getText().toString();
                 if (!str_5_2.isEmpty() && !str_5_3.isEmpty()) {
-                    int num_5_2 = Integer.parseInt(str_5_2);
-                    int num_5_3 = Integer.parseInt(str_4_3);
+                    num_5_2 = Integer.parseInt(str_5_2);
+                    num_5_3 = Integer.parseInt(str_4_3);
                     if (check_units_legal(num_5_2) && check_grade_legal(num_5_3)) {
                         return true;
                     }
