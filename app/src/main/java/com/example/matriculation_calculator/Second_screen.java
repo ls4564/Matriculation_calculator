@@ -148,6 +148,7 @@ public class Second_screen extends AppCompatActivity {
                                     arr = caulation_ans_op2(arr);
                                     break;
                                 case 3:
+                                    arr = caulation_ans_op2(arr);
                                     num_5_3 = bonus(num_5_3,num_5_2,false);
                                     num_5_3 = (num_5_3 * num_5_2);
                                     arr[3] = (sum_grade + num_5_3)/(units+num_5_2);
