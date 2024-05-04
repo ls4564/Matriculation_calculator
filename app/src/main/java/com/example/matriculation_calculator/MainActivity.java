@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 69;
     EditText user_eD,eD1,eD2,eD3,eD4,eD5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,20 +23,20 @@ public class MainActivity extends AppCompatActivity {
 
     public void Next_page_2(View view) {
         String st1 = eD1.getText().toString();
-        String st2 = eD1.getText().toString();
-        String st3 = eD1.getText().toString();
-        String st4 = eD1.getText().toString();
-        String st5 = eD1.getText().toString();
+        String st2 = eD2.getText().toString();
+        String st3 = eD3.getText().toString();
+        String st4 = eD4.getText().toString();
+        String st5 = eD5.getText().toString();
         String user_name = user_eD.getText().toString();
         if(!user_name.isEmpty())
         {
-            if (!st1.isEmpty() & !st2.isEmpty() & !st3.isEmpty() & !st4.isEmpty() & !st5.isEmpty()) {
+            if (!st1.isEmpty() && !st2.isEmpty() && !st3.isEmpty() && !st4.isEmpty() && !st5.isEmpty()) {
                 int num1 = Integer.parseInt(st1);
                 int num2 = Integer.parseInt(st2);
                 int num3 = Integer.parseInt(st3);
                 int num4 = Integer.parseInt(st4);
                 int num5 = Integer.parseInt(st5);
-                if (check_legal(num1) & check_legal(num2) & check_legal(num3) & check_legal(num4) & check_legal(num5)) {
+                if (check_legal(num1) && check_legal(num2) && check_legal(num3) && check_legal(num4) && check_legal(num5)) {
                     Intent si = new Intent(this, Second_screen.class);
                     double sum_grade = ((num1 + num2 + num3 + num4 + num5)*2) ;
                     int units = 10;
@@ -43,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
                     si.putExtra("sum_grade",sum_grade);
                     si.putExtra("units",units);
                     startActivity(si);
-                } else {
+                }
+                else
+                {
                     Toast.makeText(this, "The input is illegal!", Toast.LENGTH_SHORT).show();
                 }
             } else {

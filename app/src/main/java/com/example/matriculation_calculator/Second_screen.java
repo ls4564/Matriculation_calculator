@@ -16,9 +16,9 @@ import androidx.core.view.WindowInsetsCompat;
 public class Second_screen extends AppCompatActivity {
     EditText eD_1_2_pg2, eD_1_3_pg2, eD_2_2_pg2, eD_2_3_pg2, eD_3_1_pg2, eD_3_2_pg2, eD_3_3_pg2, eD_4_1_pg2, eD_4_2_pg2, eD_4_3_pg2, eD_5_1_pg2, eD_5_2_pg2, eD_5_3_pg2;
     Button btn_op1, btn_op2, btn_op3, btn_for_pg2_to_pg3;
-    boolean canSkip = false;
+    boolean canSkip = false,first = true;
     int btnClick = 0, units,ana1,ana2,ana3,ana4,ana5,ana6,ana7;
-    int[] arr = {-1,-1,-1,-1,-1,-1,-1};
+    double[] arr = {-1,-1,-1,-1,-1,-1,-1};
     double sum_grade;
     private String str_1_2,str_1_3,str_2_2,str_2_3,str_3_1,str_3_2,str_3_3,str_4_1,str_4_2,str_4_3,str_5_1,str_5_2,str_5_3;
     private int num_1_2,num_1_3,num_2_2,num_2_3,num_3_1,num_3_2,num_3_3,num_4_1,num_4_2,num_4_3,num_5_1,num_5_2,num_5_3;
@@ -30,7 +30,7 @@ public class Second_screen extends AppCompatActivity {
         weddings();
 
         Intent gi = getIntent();
-        sum_grade = gi.getDoubleExtra("sum", -1);
+        sum_grade = gi.getDoubleExtra("sum_grade", -1);
         units = gi.getIntExtra("units", -1);
     }
 
@@ -128,7 +128,7 @@ public class Second_screen extends AppCompatActivity {
                                 break;
                         }
 
-                        if(canSkip)
+                        if(canSkip && first)
                         {
                             units = units + num_1_2;
                             num_1_3 = bonus(num_1_3,num_1_2,true);
@@ -138,22 +138,29 @@ public class Second_screen extends AppCompatActivity {
                             num_2_3 = bonus(num_2_3,num_2_2,true);
                             sum_grade = sum_grade + (num_2_3 * num_2_2);
 
+                            num_3_3 = bonus(num_3_3,num_3_2,false);
+                            num_3_3 = (num_3_3 * num_3_2);
+                            arr[0] = (sum_grade + num_3_3)/(units + num_3_2);
+
                             switch (btnClick)
                             {
-                                case 1:
-                                    canSkip = check_one_line();
-                                    break;
                                 case 2:
-                                    canSkip = check_two_line();
+                                    arr = caulation_ans_op2(arr);
                                     break;
                                 case 3:
-                                    canSkip = check_three_line();
+                                    num_5_3 = bonus(num_5_3,num_5_2,false);
+                                    num_5_3 = (num_5_3 * num_5_2);
+                                    arr[3] = (sum_grade + num_5_3)/(units+num_5_2);
+                                    arr[4] = (sum_grade + num_5_3 + num_4_3)/(units + num_5_2 + num_4_2);
+                                    arr[5] = (sum_grade + num_5_3 + num_4_3)/(units + num_5_2 + num_4_2);
+                                    arr[6] = (sum_grade + num_5_3 + num_4_3 + num_3_3)/(units + num_5_2 + num_4_2 + num_3_2);
+
                                     break;
                             }
+                            first = false;
                             Intent nl = new Intent(this, Third_screen.class);
                             nl.putExtra("arr",arr);
-                            nl.putExtra("sum_grade",sum_grade);
-                            nl.putExtra("units",units);
+                            nl.putExtra("option",btnClick);
                             startActivity(nl);
                         }
                     }
@@ -356,6 +363,16 @@ public class Second_screen extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+
+    public double[] caulation_ans_op2(double[] arr)
+    {
+        num_4_3 = bonus(num_4_3,num_4_2,false);
+        num_4_3 = (num_4_3 * num_4_2);
+        arr[1] = (sum_grade + num_4_3)/(units+num_4_2);
+        arr[2] = (sum_grade + num_4_3 + num_3_3)/(units+num_4_2+num_3_2);
+        return arr;
     }
 
 }
