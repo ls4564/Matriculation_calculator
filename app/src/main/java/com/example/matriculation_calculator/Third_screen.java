@@ -19,13 +19,15 @@ public class Third_screen extends AppCompatActivity {
         Intent gi = getIntent();
         arr = gi.getDoubleArrayExtra("arr");
         btnClick = gi.getIntExtra("option",-1);
-        tv1.setText(arr[0] + "");
-        tv2.setText(arr[1] + "");
-        tv3.setText(arr[2] + "");
-        tv4.setText(arr[3] + "");
-        tv5.setText(arr[4] + "");
-        tv6.setText(arr[5] + "");
-        tv7.setText(arr[6] + "");
+        tv1.setText(String.format("The best: %.1f",arr[0]));
+        tv2.setText(String.format("%.1f",arr[1]));
+        tv3.setText(String.format("%.1f",arr[2]));
+        tv4.setText(String.format("%.1f",arr[3]));
+        tv5.setText(String.format("%.1f",arr[4]));
+        tv6.setText(String.format("%.1f",arr[5]));
+        tv7.setText(String.format("%.1f",arr[6]));
+
+
 
 
         switch (btnClick)

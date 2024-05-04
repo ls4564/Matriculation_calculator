@@ -17,7 +17,7 @@ public class Second_screen extends AppCompatActivity {
     EditText eD_1_2_pg2, eD_1_3_pg2, eD_2_2_pg2, eD_2_3_pg2, eD_3_1_pg2, eD_3_2_pg2, eD_3_3_pg2, eD_4_1_pg2, eD_4_2_pg2, eD_4_3_pg2, eD_5_1_pg2, eD_5_2_pg2, eD_5_3_pg2;
     Button btn_op1, btn_op2, btn_op3, btn_for_pg2_to_pg3;
     boolean canSkip = false,first = true;
-    int btnClick = 0, units,ana1,ana2,ana3,ana4,ana5,ana6,ana7;
+    int btnClick = 0, units,anass;
     double[] arr = {-1,-1,-1,-1,-1,-1,-1};
     double sum_grade;
     private String str_1_2,str_1_3,str_2_2,str_2_3,str_3_1,str_3_2,str_3_3,str_4_1,str_4_2,str_4_3,str_5_1,str_5_2,str_5_3;
@@ -27,6 +27,7 @@ public class Second_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_screen);
+
         weddings();
 
         Intent gi = getIntent();
@@ -119,12 +120,15 @@ public class Second_screen extends AppCompatActivity {
                         switch (btnClick) {
                             case 1:
                                 canSkip = check_one_line();
+                                anass = 1;
                                 break;
                             case 2:
                                 canSkip = check_two_line();
+                                anass = 3;
                                 break;
                             case 3:
                                 canSkip = check_three_line();
+                                anass = 7;
                                 break;
                         }
 
@@ -158,6 +162,8 @@ public class Second_screen extends AppCompatActivity {
 
                                     break;
                             }
+                            arr = sort_arr(arr);
+
                             first = false;
                             Intent nl = new Intent(this, Third_screen.class);
                             nl.putExtra("arr",arr);
@@ -233,6 +239,28 @@ public class Second_screen extends AppCompatActivity {
         return false;
     }
 
+
+    public double[] sort_arr(double arr[])
+    {
+        double temp = 0;
+        boolean all_sort = false;
+
+        while(!all_sort)
+        {
+            all_sort = true;
+            for(int i = 1 ; i < anass ; i++)
+            {
+                if(arr[i-1] < arr [i])
+                {
+                    temp = arr[i-1];
+                    arr[i-1] = arr[i];
+                    arr[i] = temp;
+                    all_sort = false;
+                }
+            }
+        }
+        return arr;
+    }
 
 
     public int bonus(int grade,int unit,boolean op)
