@@ -21,8 +21,8 @@ public class Second_screen extends AppCompatActivity {
     double[] arr = {-1,-1,-1,-1,-1,-1,-1};
     double sum_grade;
     private String str_1_2,str_1_3,str_2_2,str_2_3,str_3_1,str_3_2,str_3_3,str_4_1,str_4_2,str_4_3,str_5_1,str_5_2,str_5_3;
-    private int num_1_2,num_1_3,num_2_2,num_2_3,num_3_1,num_3_2,num_3_3,num_4_1,num_4_2,num_4_3,num_5_1,num_5_2,num_5_3;
-
+    private int num_1_2,num_1_3,num_2_2,num_2_3,num_3_2,num_3_3,num_4_2,num_4_3,num_5_2,num_5_3;
+    Intent gi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +30,7 @@ public class Second_screen extends AppCompatActivity {
 
         weddings();
 
-        Intent gi = getIntent();
+        gi = getIntent();
         sum_grade = gi.getDoubleExtra("sum_grade", -1);
         units = gi.getIntExtra("units", -1);
     }
@@ -91,15 +91,14 @@ public class Second_screen extends AppCompatActivity {
 
 
 
-    public void go_back_1(View view) {
-        finish();
-    }
+
 
 
 
 
     public void Next_page_3(View view) {
-        canSkip = false;
+        Reset_variables();
+
 
         //Math
         str_1_2 = eD_1_2_pg2.getText().toString();
@@ -132,7 +131,7 @@ public class Second_screen extends AppCompatActivity {
                                 break;
                         }
 
-                        if(canSkip && first)
+                        if(canSkip)
                         {
                             units = units + num_1_2;
                             num_1_3 = bonus(num_1_3,num_1_2,true);
@@ -164,8 +163,39 @@ public class Second_screen extends AppCompatActivity {
                             }
                             arr = sort_arr(arr);
 
-                            first = false;
                             Intent nl = new Intent(this, Third_screen.class);
+                            nl.putExtra("Hebrew",gi.getStringExtra("Hebrew"));
+                            nl.putExtra("Digits",gi.getStringExtra("Digits"));
+                            nl.putExtra("History",gi.getStringExtra("History"));
+                            nl.putExtra("Citizenship",gi.getStringExtra("Citizenship"));
+                            nl.putExtra("Bible",gi.getStringExtra("Bible"));
+
+                            nl.putExtra("Math_grade",str_1_3);
+                            nl.putExtra("Math_unit",str_1_2);
+                            nl.putExtra("Math_bonus",get_value_of_bonus(num_1_2,true));
+
+                            nl.putExtra("English_grade",str_2_3);
+                            nl.putExtra("English_unit",str_2_2);
+                            nl.putExtra("English_bonus",get_value_of_bonus(num_2_2,true));
+
+
+                            nl.putExtra("name1",str_3_1);
+                            nl.putExtra("name2",str_4_1);
+                            nl.putExtra("name3",str_5_1);
+
+                            nl.putExtra("unit1",str_3_2);
+                            nl.putExtra("unit2",str_4_2);
+                            nl.putExtra("unit3",str_5_2);
+
+                            nl.putExtra("grade1",str_3_3);
+                            nl.putExtra("grade2",str_4_3);
+                            nl.putExtra("grade3",str_5_3);
+
+                            nl.putExtra("bonus1", get_value_of_bonus(num_3_2,false));
+                            nl.putExtra("bonus2", get_value_of_bonus(num_4_2,false));
+                            nl.putExtra("bonus3", get_value_of_bonus(num_5_2,false));
+
+
                             nl.putExtra("arr",arr);
                             nl.putExtra("option",btnClick);
                             startActivity(nl);
@@ -216,6 +246,49 @@ public class Second_screen extends AppCompatActivity {
         btn_for_pg2_to_pg3 = findViewById(R.id.btn_for_pg2_to_pg3);
     }
 
+    public void Reset_variables()
+    {
+        canSkip = false;
+        str_1_2 = "";
+        str_1_3 = "";
+        str_2_2 = "";
+        str_2_3 = "";
+        str_3_1 = "";
+        str_3_2 = "";
+        str_3_3 = "";
+        str_4_1 = "";
+        str_4_2 = "";
+        str_4_3 = "";
+        str_5_1 = "";
+        str_5_2 = "";
+        str_5_3 = "";
+
+        num_1_2 = 0;
+        num_1_3 = 0;
+        num_2_2 = 0;
+        num_2_3 = 0;
+        num_3_2 = 0;
+        num_3_3 = 0;
+        num_4_2 = 0;
+        num_4_3 = 0;
+        num_5_2 = 0;
+        num_5_3 = 0;
+
+        units = gi.getIntExtra("units",-1);
+        sum_grade = gi.getDoubleExtra("sum_grade",-1);
+
+        arr[0] = -1;
+        arr[1] = -1;
+        arr[2] = -1;
+        arr[3] = -1;
+        arr[4] = -1;
+        arr[5] = -1;
+        arr[6] = -1;
+
+
+
+    }
+
 
 
     public boolean check_units_legal( int num)
@@ -233,8 +306,12 @@ public class Second_screen extends AppCompatActivity {
     public boolean check_grade_legal ( int num)
     {
 
-        if (num <= 100) {
-            return true;
+        if (num <= 100)
+        {
+            if(num > 0)
+            {
+                return true;
+            }
         }
         return false;
     }
@@ -294,7 +371,37 @@ public class Second_screen extends AppCompatActivity {
         return grade;
     }
 
-
+    public String get_value_of_bonus(int unit,boolean op)
+    //op true - English, math. 4 = 15, 5 = 30
+    //op false - all the others. 4 = 10, 5 = 20
+    {
+        String bouns = "0";
+        if(op)
+        {
+            switch (unit)
+            {
+                case 4:
+                    bouns = "15";
+                    break;
+                case 5:
+                    bouns = "30";
+                    break;
+            }
+        }
+        else
+        {
+            switch (unit)
+            {
+                case 4:
+                    bouns = "10";
+                    break;
+                case 5:
+                    bouns = "20";
+                    break;
+            }
+        }
+        return bouns;
+    }
 
     public boolean check_one_line()
     {
@@ -402,6 +509,12 @@ public class Second_screen extends AppCompatActivity {
         arr[1] = (sum_grade + num_4_3)/(units+num_4_2);
         arr[2] = (sum_grade + num_4_3 + num_3_3)/(units+num_4_2+num_3_2);
         return arr;
+    }
+
+
+    public void go_back_1(View view)
+    {
+        finish();
     }
 
 }

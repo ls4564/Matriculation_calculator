@@ -41,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
                     double sum_grade = ((num1 + num2 + num3 + num4 + num5)*2) ;
                     int units = 10;
 
+                    si.putExtra("Hebrew",st1);
+                    si.putExtra("Digits",st2);
+                    si.putExtra("History",st3);
+                    si.putExtra("Citizenship",st4);
+                    si.putExtra("Bible",st5);
+
                     si.putExtra("sum_grade",sum_grade);
                     si.putExtra("units",units);
                     startActivity(si);
